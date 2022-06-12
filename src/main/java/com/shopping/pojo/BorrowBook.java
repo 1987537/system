@@ -15,4 +15,5 @@ public class BorrowBook {
     private int uid;
     private Date loandate;
     private Date returndate;
+    private Book book;
 }
