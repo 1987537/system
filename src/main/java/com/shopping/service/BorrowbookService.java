@@ -29,4 +29,22 @@ public interface BorrowbookService {
 
     //检测是否借了同一本书
    BorrowBook queryUserAndBookIsNull(BorrowBook borrowBook);
+    //管理员查询近一个月的借书记录
+    List<BorrowBook> queryOneMonthBorrow();
+
+    //管理员查询超过一个月没有归还图书的借书记录
+    List<BorrowBook> queryMangMonthNoReturnBorrow();
+
+    //管理员查询在一个时间段内的借书记录
+    List<BorrowBook> queryListByTimeBorrow(BorrowBook borrowBook);
+
+
+    //用户查询近一个月的借书记录
+    List<BorrowBook> queryUserOneMonthBorrow(int uid);
+
+    //用户查询超过一个月没有归还图书的借书记录
+    List<BorrowBook> queryUserMangMonthNoReturnBorrow(int uid);
+
+    //用户查询在一个时间段内的借书记录
+    List<BorrowBook> queryUserListByTimeBorrow(BorrowBook borrowBook);
 }

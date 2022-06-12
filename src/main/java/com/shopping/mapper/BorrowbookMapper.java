@@ -11,6 +11,67 @@ public interface BorrowbookMapper {
     @Insert("INSERT `borrowbook`(`bid`,`uid`,`loandate`) VALUES(#{bid},#{uid},#{loandate})")
     int addBorrowbook(BorrowBook borrowBook);
 
+    //管理员查询近一个月的借书记录
+    @Select("SELECT * FROM `borrowbook` WHERE (CURDATE()-`loandate`)<=30")
+    @Results({
+            @Result(id = true, column = "bid", property = "bid"),
+            @Result(column = "bid", property = "book",
+                    one = @One(select = "com.shopping.mapper.BookMapper.queryBookBybid"))
+
+    })
+    List<BorrowBook> queryOneMonthBorrow();
+
+    //管理员查询超过一个月没有归还图书的借书记录
+    @Select("SELECT * FROM `borrowbook` WHERE (CURDATE()-`loandate`)>30 AND `returndate` IS NULL ")
+    @Results({
+            @Result(id = true, column = "bid", property = "bid"),
+            @Result(column = "bid", property = "book",
+                    one = @One(select = "com.shopping.mapper.BookMapper.queryBookBybid"))
+
+    })
+    List<BorrowBook> queryMangMonthNoReturnBorrow();
+
+    //管理员查询在一个时间段内的借书记录
+    @Select("SELECT * FROM `borrowbook` WHERE `loandate`>=#{startIndex} AND `loandate`<=#{endIndex}")
+    @Results({
+            @Result(id = true, column = "bid", property = "bid"),
+            @Result(column = "bid", property = "book",
+                    one = @One(select = "com.shopping.mapper.BookMapper.queryBookBybid"))
+
+    })
+    List<BorrowBook> queryListByTimeBorrow(BorrowBook borrowBook);
+
+
+    //用户查询近一个月的借书记录
+    @Select("SELECT * FROM `borrowbook` WHERE (CURDATE()-`loandate`)<=30 and`uid`=#{uid}")
+    @Results({
+            @Result(id = true, column = "bid", property = "bid"),
+            @Result(column = "bid", property = "book",
+                    one = @One(select = "com.shopping.mapper.BookMapper.queryBookBybid"))
+
+    })
+    List<BorrowBook> queryUserOneMonthBorrow(int uid);
+
+    //用户查询超过一个月没有归还图书的借书记录
+    @Select("SELECT * FROM `borrowbook` WHERE (CURDATE()-`loandate`)>30 AND `returndate` IS NULL and `uid`=#{uid}")
+    @Results({
+            @Result(id = true, column = "bid", property = "bid"),
+            @Result(column = "bid", property = "book",
+                    one = @One(select = "com.shopping.mapper.BookMapper.queryBookBybid"))
+
+    })
+    List<BorrowBook> queryUserMangMonthNoReturnBorrow(int uid);
+
+    //用户查询在一个时间段内的借书记录
+    @Select("SELECT * FROM `borrowbook` WHERE `loandate`>=#{startIndex} AND `loandate`<=#{endIndex} and `uid`=#{uid}")
+    @Results({
+            @Result(id = true, column = "bid", property = "bid"),
+            @Result(column = "bid", property = "book",
+                    one = @One(select = "com.shopping.mapper.BookMapper.queryBookBybid"))
+
+    })
+    List<BorrowBook> queryUserListByTimeBorrow(BorrowBook borrowBook);
+
     //查询所有借阅信息
     @Select("SELECT * FROM `borrowbook`")
     @Results({

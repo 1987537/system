@@ -16,4 +16,6 @@ public class BorrowBook {
     private Date loandate;
     private Date returndate;
     private Book book;
+    private Date startIndex;//开始查询的时间
+    private Date endIndex;//结束查询的时间
 }

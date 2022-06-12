@@ -73,24 +73,6 @@
                 </c:if></td>
             </tr>
         </c:forEach>
-        <c:forEach items="${borrowBookListsuper}" var="borrows" varStatus="status">
-            <tr >
-                <td >${borrows.book.bname}</td>
-                <td><fmt:formatDate value="${borrows.loandate}" pattern="yyyy-MM-dd"/></td>
-                <td style="color: red">
-                    <c:if test="${borrows.returndate==null}">
-                        已超时，请尽快归还
-                    </c:if>
-                </td>
-                <td><c:if test="${borrows.returndate==null}">
-                    <form action="/borrow/returnBook.action" method="post">
-                        <input type="hidden" name="bid" value="${borrows.bid}">
-                        <input type="hidden" name="uid" value="${borrows.uid}">
-                        <input type="submit" value="归还">
-                    </form>
-                </c:if></td>
-            </tr>
-        </c:forEach>
         </tbody>
     </table>
 </div>

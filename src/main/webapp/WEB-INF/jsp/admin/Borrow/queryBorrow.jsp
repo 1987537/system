@@ -19,11 +19,11 @@
 </div>
 <div style="position:absolute;top:100px;left:0px;width:20%;height:600px;background-color:powderblue">
     <ul>
-        <li><a href="/users/queryOneUserByUid.action?uid=${uid}"><h2>个人信息</h2></a> </li>
-        <li><a href="/books/userqueryListBook.action?uid=${uid}"><h2>图书列表</h2></a> </li>
-        <li><a href="/cat/userqueryListCat.action?uid=${uid}"><h2>目录列表</h2></a> </li>
-        <li><a href="/borrow/queryBorrowByUid.action?uid=${uid}"><h2>借阅信息</h2></a> </li>
-        <li><a href="/borrow/queryTop.action?uid=${uid}"><h2>借阅排行榜</h2></a> </li>
+        <li><a href="/books/queryListBook.action"><h2>图书列表</h2></a> </li>
+        <li><a href="/cat/queryListCat.action"><h2>目录列表</h2></a> </li>
+        <li><a href="/borrow/queryAllBorrow.action"><h2>借阅信息</h2></a> </li>
+        <li><a href="/borrow/queryTopAdmin.action"><h2>借阅排行榜</h2></a> </li>
+        <li><a href="/users/queryAllUser.action"><h2>管理用户</h2></a> </li>
         <li><a href="/index/redindex.action"><h2>退出</h2></a></li>
     </ul>
 </div>
@@ -38,57 +38,30 @@
 
 
     %>
-    <form action="/borrow/queryUserListByTimeBorrow.action" method="post">
+    <form action="/borrow/queryListByTimeBorrow.action" method="post">
         开始查询时间:<input type="date" name="startIndex" max="<%=str1%>">
         结束查询时间:<input type="date" name="endIndex" max="<%=str1%>">
-        <input type="hidden" name="uid" value="${uid}">
         <input type="submit" value="查询">
     </form>
-    <h3>近一个月借书记录以及未及时归还书籍列表</h3>
     <table border="1" cellspacing="0" cellpadding="0">
         <thead>
         <tr>
             <th>书名</th>
+            <th>借书用户编号</th>
             <th>借出时间</th>
             <th>归还时间</th>
-            <th>操作</th>
         </tr>
         </thead>
         <tbody>
         <c:forEach items="${borrowBookList}" var="borrows" varStatus="status">
             <tr >
                 <td >${borrows.book.bname}</td>
+                <td><a href="/users/queryUserByUid.action?uid=${borrows.uid}">${borrows.uid}</a> </td>
                 <td><fmt:formatDate value="${borrows.loandate}" pattern="yyyy-MM-dd"/></td>
                 <td><fmt:formatDate value="${borrows.returndate}" pattern="yyyy-MM-dd"/>
                     <c:if test="${borrows.returndate==null}">
                         未归还
-                    </c:if>
-                </td>
-                <td><c:if test="${borrows.returndate==null}">
-                    <form action="/borrow/returnBook.action" method="post">
-                        <input type="hidden" name="bid" value="${borrows.bid}">
-                        <input type="hidden" name="uid" value="${borrows.uid}">
-                        <input type="submit" value="归还">
-                    </form>
-                </c:if></td>
-            </tr>
-        </c:forEach>
-        <c:forEach items="${borrowBookListsuper}" var="borrows" varStatus="status">
-            <tr >
-                <td >${borrows.book.bname}</td>
-                <td><fmt:formatDate value="${borrows.loandate}" pattern="yyyy-MM-dd"/></td>
-                <td style="color: red">
-                    <c:if test="${borrows.returndate==null}">
-                        已超时，请尽快归还
-                    </c:if>
-                </td>
-                <td><c:if test="${borrows.returndate==null}">
-                    <form action="/borrow/returnBook.action" method="post">
-                        <input type="hidden" name="bid" value="${borrows.bid}">
-                        <input type="hidden" name="uid" value="${borrows.uid}">
-                        <input type="submit" value="归还">
-                    </form>
-                </c:if></td>
+                    </c:if></td>
             </tr>
         </c:forEach>
         </tbody>

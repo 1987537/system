@@ -10,8 +10,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 @Service
 public class BorrowbookServiceImpl implements BorrowbookService {
+
     @Autowired
     private BorrowbookMapper borrowbookMapper;
+
     @Override
     public List<BorrowBook> queryAllBorrow() {
         return borrowbookMapper.queryAllBorrow();
@@ -51,4 +53,38 @@ public class BorrowbookServiceImpl implements BorrowbookService {
     public BorrowBook queryUserAndBookIsNull(BorrowBook borrowBook) {
         return borrowbookMapper.queryUserAndBookIsNull(borrowBook);
     }
+
+    @Override
+    public List<BorrowBook> queryOneMonthBorrow(){
+        return borrowbookMapper.queryOneMonthBorrow();
+    };
+
+    @Override
+    public List<BorrowBook> queryMangMonthNoReturnBorrow(){
+        return borrowbookMapper.queryMangMonthNoReturnBorrow();
+    };
+
+    @Override
+    public List<BorrowBook> queryListByTimeBorrow(BorrowBook borrowBook){
+        return borrowbookMapper.queryListByTimeBorrow(borrowBook);
+    };
+
+
+    @Override
+    public List<BorrowBook> queryUserOneMonthBorrow(int uid){
+        return borrowbookMapper.queryUserOneMonthBorrow(uid);
+    };
+
+
+
+    @Override
+    public List<BorrowBook> queryUserMangMonthNoReturnBorrow(int uid) {
+        return borrowbookMapper.queryUserMangMonthNoReturnBorrow(uid);
+    }
+
+    @Override
+    public List<BorrowBook> queryUserListByTimeBorrow(BorrowBook borrowBook){
+        return borrowbookMapper.queryUserListByTimeBorrow(borrowBook);
+    };
+
 }

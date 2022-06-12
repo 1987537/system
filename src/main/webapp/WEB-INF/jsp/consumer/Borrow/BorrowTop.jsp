@@ -28,26 +28,97 @@
     </ul>
 </div>
 <div style="position:absolute;top:100px;left:20%;height:600px;">
-    <table border="1" cellspacing="0" cellpadding="0">
-        <thead>
-        <tr>
-            <th>书名</th>
-            <th>借出次数</th>
-            <th>剩余量</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach items="${rankingTop}" var="top" varStatus="status">
+    <script src="js/echarts.min.js"></script>
+    <div id="container" style="height: 100%;width: 600%"></div>
 
-            <tr >
-                <td ><a href="/books/userqueryBookBybid.action?bid=${top.book.bid}&uid=${uid}">${top.book.bname}</a> </td>
-                <td>${top.count}</td>
-                <td>${top.book.residue}</td>
 
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
+    <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+
+    <script type="text/javascript">
+        var dom = document.getElementById('container');
+        var myChart = echarts.init(dom, null, {
+            renderer: 'canvas',
+            useDirtyRect: false
+        });
+        var app = {};
+
+        var option;
+
+        option = {
+            title: {
+                text: '借出数和剩余量',
+                subtext: 'Fake Data'
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            legend: {
+                data: ['借出数', '剩余量']
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    dataView: { show: true, readOnly: false },
+                    magicType: { show: true, type: ['line', 'bar'] },
+                    restore: { show: true },
+                    saveAsImage: { show: true }
+                }
+            },
+            calculable: true,
+            xAxis: [
+                {
+                    type: 'category',
+                    // prettier-ignore
+                    data: ['${bookName[0]}', '${bookName[1]}', '${bookName[2]}', '${bookName[3]}', '${bookName[4]}']
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value'
+                }
+            ],
+            series: [
+                {
+                    name: '借出数',
+                    type: 'bar',
+                    data: [
+                        ${borrowcount[0]}, ${borrowcount[1]}, ${borrowcount[2]}, ${borrowcount[3]}, ${borrowcount[4]}
+                    ],
+                    markPoint: {
+                        data: [
+                            { type: 'max', name: 'Max' },
+                            { type: 'min', name: 'Min' }
+                        ]
+                    },
+                    markLine: {
+                        data: [{ type: 'average', name: 'Avg' }]
+                    }
+                },
+                {
+                    name: '剩余量',
+                    type: 'bar',
+                    data: [
+                        ${bookresidue[0]},${bookresidue[1]},${bookresidue[2]}, ${bookresidue[3]},${bookresidue[4]}
+                    ],
+                    markPoint: {
+                        data: [
+                            { name: 'Max', value: 182.2, xAxis: 7, yAxis: 183 },
+                            { name: 'Min', value: 2.3, xAxis: 11, yAxis: 3 }
+                        ]
+                    },
+                    markLine: {
+                        data: [{ type: 'average', name: 'Avg' }]
+                    }
+                }
+            ]
+        };
+
+        if (option && typeof option === 'object') {
+            myChart.setOption(option);
+        }
+
+        window.addEventListener('resize', myChart.resize);
+    </script>
 </div>
 </body>
 </html>
