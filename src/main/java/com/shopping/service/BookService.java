@@ -1,6 +1,7 @@
 package com.shopping.service;
 
 import com.shopping.pojo.Book;
+import com.shopping.pojo.Catalogue;
 
 import java.util.List;
 
@@ -21,5 +22,6 @@ public interface BookService {
     int updateBorrowAndReturn(Book book);
     //全查
     List<Book> queryListBook();
-    //模糊查询
+    //根据cid统计此目录下书的本数
+    Catalogue queryBookCountByCid(int cid);
 }

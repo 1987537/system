@@ -15,4 +15,5 @@ public class Catalogue {
     private int cid;
     private String cname;
     private List<Book> books;
+    private Integer count;
 }

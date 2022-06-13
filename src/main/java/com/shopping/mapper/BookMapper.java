@@ -1,6 +1,7 @@
 package com.shopping.mapper;
 
 import com.shopping.pojo.Book;
+import com.shopping.pojo.Catalogue;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
@@ -21,7 +22,12 @@ public interface BookMapper {
     //根据cid查
     @Select("SELECT * FROM `book` WHERE `cid`=#{cid}")
     List<Book> queryBookByCid(int cid);
-    //增
+    //根据cid统计此目录下书的本数
+    @Select("SELECT IFNULL(COUNT(*),0) AS \"count\" \n" +
+            "FROM `book`,`catalogue` \n" +
+            "WHERE `book`.`cid`=`catalogue`.`cid` AND `catalogue`.`cid`=#{cid}")
+    Catalogue queryBookCountByCid(int cid);
+    // 增
     @Insert("INSERT INTO `book`(`bname`,`pic`,`cid`,`publishing`,`total`,`borrow`,`residue`) VALUES(#{bname},#{pic},#{cid},#{publishing},#{total},#{borrow},#{residue})")
     int addBook(Book book);
     //删

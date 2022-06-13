@@ -2,6 +2,7 @@ package com.shopping.service.impl;
 
 import com.shopping.mapper.BookMapper;
 import com.shopping.pojo.Book;
+import com.shopping.pojo.Catalogue;
 import com.shopping.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,5 +51,10 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<Book> queryListBook() {
         return bookMapper.queryListBook();
+    }
+
+    @Override
+    public Catalogue queryBookCountByCid(int cid) {
+        return bookMapper.queryBookCountByCid(cid);
     }
 }

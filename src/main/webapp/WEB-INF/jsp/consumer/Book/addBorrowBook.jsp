@@ -57,7 +57,9 @@
                 <td>${bid}</td>
                 <td><%=str1%></td>
                 <input type="hidden" name="loandate" value=<%=str1%>>
-                <td><input type="submit" value="是"></td>
+                <td><input type="submit" value="是">
+                    <a href="/books/userqueryListBook.action?uid=${uid}">否</a>
+                </td>
             </form>
         </tr>
         </tbody>

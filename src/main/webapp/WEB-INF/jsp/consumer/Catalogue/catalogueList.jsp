@@ -36,6 +36,7 @@
         <tr>
             <th>类别</th>
             <th>查询书目</th>
+            <th>书的总数</th>
         </tr>
         </thead>
         <tbody>
@@ -44,6 +45,7 @@
                 <input type="hidden" value="${cat.cid}"  name="cid"/>
                 <td>${cat.cname}</td>
                 <td><a href="/cat/userqueryListByCid.action?cid=${cat.cid}&uid=${uid}">查询书目</a> </td>
+                <td>${cat.count}</td>
             </tr>
         </c:forEach>
         </tbody>

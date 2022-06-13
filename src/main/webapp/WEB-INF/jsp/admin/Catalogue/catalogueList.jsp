@@ -26,6 +26,7 @@
         <li><a href="/borrow/queryAllBorrow.action"><h2>借阅信息</h2></a> </li>
         <li><a href="/borrow/queryTopAdmin.action"><h2>借阅排行榜</h2></a> </li>
         <li><a href="/users/queryAllUser.action"><h2>管理用户</h2></a> </li>
+        <li><a href="/users/queryBalanceTop.action"><h2>用户余额排行榜</h2></a> </li>
         <li><a href="/index/redindex.action"><h2>退出</h2></a></li>
     </ul>
 </div>
@@ -36,6 +37,7 @@
         <tr>
             <th>类别</th>
             <th>查询书目</th>
+            <th>书的总数</th>
             <th>修改</th>
             <th>删除</th>
         </tr>
@@ -46,6 +48,7 @@
                 <input type="hidden" value="${cat.cid}"  name="cid"/>
                 <td>${cat.cname}</td>
                 <td><a href="/cat/queryListByCid.action?cid=${cat.cid}">查询书目</a></td>
+                <td>${cat.count}</td>
                 <td><a href="/cat/queryCatByCid.action?cid=${cat.cid}">修</a> </td>
                 <td><a href="/cat/deleteCatById.action?cid=${cat.cid}">删</a> </td>
             </tr>

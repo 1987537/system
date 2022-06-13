@@ -2,6 +2,7 @@ package com.shopping.controller;
 
 import com.shopping.pojo.Book;
 import com.shopping.pojo.Catalogue;
+import com.shopping.service.BookService;
 import com.shopping.service.CatalogueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,8 @@ import java.util.List;
 public class CatalogueController {
     @Autowired
     private CatalogueService catalogueService;
+    @Autowired
+    private BookService bookService;
     //管理员
     //跳转添加页
     @RequestMapping("redAdd")
@@ -35,7 +38,8 @@ public class CatalogueController {
     @RequestMapping("deleteCatById")
     public String deleteCatById(int cid){
         List<Book> books=catalogueService.queryLisyByCid(cid).getBooks();
-        if(books!=null){
+        int len=books.size();
+        if(len!=0){
             return "error/deleteCatById";
         }
         int res=catalogueService.deleteCatById(cid);
@@ -68,6 +72,9 @@ public class CatalogueController {
     @RequestMapping("queryListCat")
     public ModelAndView queryListCat(){
         List<Catalogue> catalogueList=catalogueService.queryListCat();
+        for (Catalogue catalogue:catalogueList) {
+            catalogue.setCount(bookService.queryBookCountByCid(catalogue.getCid()).getCount());
+        }
         ModelAndView mv=new ModelAndView();
         mv.addObject("catalogueList",catalogueList);
         mv.setViewName("admin/Catalogue/catalogueList");
@@ -99,6 +106,9 @@ public class CatalogueController {
     @RequestMapping("userqueryListCat")
     public ModelAndView userqueryListCat(int uid){
         List<Catalogue> catalogueList=catalogueService.queryListCat();
+        for (Catalogue catalogue:catalogueList) {
+            catalogue.setCount(bookService.queryBookCountByCid(catalogue.getCid()).getCount());
+        }
         ModelAndView mv=new ModelAndView();
         mv.addObject("catalogueList",catalogueList);
         mv.addObject("uid",uid);

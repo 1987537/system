@@ -24,6 +24,7 @@
         <li><a href="/borrow/queryAllBorrow.action"><h2>借阅信息</h2></a> </li>
         <li><a href="/borrow/queryTopAdmin.action"><h2>借阅排行榜</h2></a> </li>
         <li><a href="/users/queryAllUser.action"><h2>管理用户</h2></a> </li>
+        <li><a href="/users/queryBalanceTop.action"><h2>用户余额排行榜</h2></a> </li>
         <li><a href="/index/redindex.action"><h2>退出</h2></a></li>
     </ul>
 </div>

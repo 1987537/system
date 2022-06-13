@@ -52,4 +52,8 @@ public interface  UserMapper {
     @Delete("DELETE FROM `user` WHERE `uid`=#{uid}")
     int deleteUserByUid(int uid);
 
+    //余额排行榜
+    @Select("SELECT `uid`,`username`,`balance` FROM `user` WHERE `identity`=2 ORDER BY `balance` DESC LIMIT 3")
+    List<User> queryUserTop();
+
 }

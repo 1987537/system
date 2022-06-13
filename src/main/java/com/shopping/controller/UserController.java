@@ -162,6 +162,24 @@ public class UserController {
             return "error/error";
         }
     }
+    //氪金排行榜
+    @RequestMapping("queryBalanceTop")
+    public ModelAndView queryBalanceTop(){
+        ModelAndView mv=new ModelAndView();
+        List<User> users=userService.queryUserTop();
+        String[] name=new String[3];
+        int[] balance=new int[3];
+        int index=0;
+        for (User user:users) {
+            name[index]=user.getUsername();
+            balance[index]=user.getBalance();
+            index++;
+        }
+        mv.addObject("name",name);
+        mv.addObject("balance",balance);
+        mv.setViewName("admin/User/BalanceTop");
+        return mv;
+    }
     //用户
     //删
     @RequestMapping("userdeleteUserByUid")

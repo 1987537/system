@@ -23,7 +23,7 @@
 			<div class="buttons">
 				<input type="submit"  value="登录系统" class="input-button" />
 				<input type="reset"  value="重　　填" class="input-button" />
-				<label class="control-label" >没有账号请<a href="/users/checkcode.action" style="color: red;">注册</a></label>
+				<label class="control-label" >没有账号请<a href="/users/toregister.action" style="color: red;">注册</a></label>
 			</div>
 		</form>
 	</div>

@@ -24,14 +24,12 @@
         <li><a href="/borrow/queryAllBorrow.action"><h2>借阅信息</h2></a> </li>
         <li><a href="/borrow/queryTopAdmin.action"><h2>借阅排行榜</h2></a> </li>
         <li><a href="/users/queryAllUser.action"><h2>管理用户</h2></a> </li>
+        <li><a href="/users/queryBalanceTop.action"><h2>用户余额排行榜</h2></a> </li>
         <li><a href="/index/redindex.action"><h2>退出</h2></a></li>
     </ul>
 </div>
 <div style="position:absolute;top:100px;left:20%;height:600px;">
-    <script src="js/echarts.min.js"></script>
-    <div id="container" style="height: 100%;width: 400%"></div>
-
-
+    <div id="container" style="height: 100%;width: 600%"></div>
     <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
 
     <script type="text/javascript">

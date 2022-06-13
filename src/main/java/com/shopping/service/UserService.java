@@ -25,4 +25,6 @@ public interface UserService {
     int updateUserByUid(User user);
     //删除用户
     int deleteUserByUid(int uid);
+    //余额排行榜
+    List<User> queryUserTop();
 }
